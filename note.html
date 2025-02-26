@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Average Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 22px);
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Exam Average Calculator</h2>
+        <form id="calculator">
+            <div id="inputs">
+                <label>Note 1 (Coefficient 7): <input type="number" step="0.01" id="note1"></label>
+                <label>Note 2 (Coefficient 3): <input type="number" step="0.01" id="note2"></label>
+                <label>Note 3 (Coefficient 2): <input type="number" step="0.01" id="note3"></label>
+                <label>Note 4 (Coefficient 2): <input type="number" step="0.01" id="note4"></label>
+                <label>Note 5 (Coefficient 2.5): <input type="number" step="0.01" id="note5"></label>
+                <label>Note 6 (Coefficient 2): <input type="number" step="0.01" id="note6"></label>
+            </div>
+            <button type="button" onclick="calculateAverage()">Calculate Average</button>
+        </form>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function calculateAverage() {
+            const notes = [
+                parseFloat(document.getElementById('note1').value) || 0,
+                parseFloat(document.getElementById('note2').value) || 0,
+                parseFloat(document.getElementById('note3').value) || 0,
+                parseFloat(document.getElementById('note4').value) || 0,
+                parseFloat(document.getElementById('note5').value) || 0,
+                parseFloat(document.getElementById('note6').value) || 0,
+            ];
+            const coefficients = [7, 3, 2, 2, 2.5, 2];
+            
+            let total = 0;
+            let totalCoeff = 0;
+
+            for (let i = 0; i < notes.length; i++) {
+                total += notes[i] * coefficients[i];
+                totalCoeff += coefficients[i];
+            }
+
+            const average = totalCoeff ? (total / totalCoeff).toFixed(2) : 0;
+
+            document.getElementById('result').innerText = `Weighted Average: ${average}`;
+        }
+    </script>
+</body>
+</html>
